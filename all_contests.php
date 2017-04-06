@@ -1,12 +1,12 @@
-<?php 
+<?php
 include_once './include/db.php';
-include_once './include/header.php'; 
+include_once './include/header.php';
 ?>
-<section id="content">
-	<div id="one-less" class="all">
-		<h1 class="text-effect">All Contests</h1>
-		<p>Win Amazing prizes!</p>
-	</div> <!-- END id="one-less" -->
+    <section id="content">
+        <div id="one-less" class="all">
+            <h1 class="text-effect">All Contests</h1>
+            <p>Win Amazing prizes!</p>
+        </div> <!-- END id="one-less" -->
 <?php
 /*  CONTESTS
 ------------------------------------------------------- */
@@ -19,8 +19,8 @@ $sql_prizes = "SELECT
 		              `tbl_prizes` ";
 $query_prizes = mysqli_query($link, $sql_prizes);
 
-while ($row_prizes = mysqli_fetch_assoc($query_prizes)) {	
-	$array_prizes[] = $row_prizes;			
+while ($row_prizes = mysqli_fetch_assoc($query_prizes)) {
+    $array_prizes[] = $row_prizes;
 } //END WHILE
 
 $sql_contests = "SELECT 
@@ -36,6 +36,6 @@ $sql_contests = "SELECT
 			   GROUP BY 
 					    c.`col_id`
 			   ORDER BY 
-		                c.`col_id` DESC ";						
+		                c.`col_id` DESC ";
 
 include_once './include/contests.php';
