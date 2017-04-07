@@ -40,6 +40,7 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
         ====================================================================================================*/
         if ($_POST['dir'] == "contests/users_photo") {
             include_once './include/db.php';
+            global $link;
             $photo_url = mysqli_real_escape_string($link, $unic_name);
 
             $insert = "INSERT INTO `tbl_photo` VALUES (
@@ -106,6 +107,16 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
             $photo_url = mysqli_real_escape_string($link, $unic_name);
 
             $update = "UPDATE `tbl_contests` SET `col_logo` = '$photo_url' WHERE `col_id`= " . (int)$_POST['contest_id'] . " AND `col_company_id` = " . (int)$_SESSION["user_id"];
+            mysqli_query($link, $update);
+            mysqli_close($link);
+        }
+        /* ===================================================================================================
+        ====================================================================================================*/
+        if ($_POST['dir'] == "companies/header_photo") {
+            include_once './include/db.php';
+            $photo_url = mysqli_real_escape_string($link, $unic_name);
+
+            $update = "UPDATE `tbl_users` SET `col_header_photo` = '$photo_url' WHERE `col_id` = " . (int)$_SESSION["user_id"];
             mysqli_query($link, $update);
             mysqli_close($link);
         }
