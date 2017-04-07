@@ -1,4 +1,6 @@
 <?php
+include_once './include/commonFunctions.php';
+
 if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
     include_once './include/db.php';
     header("Content-Type: text/html; charset=utf-8");
@@ -30,20 +32,7 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
 
     // Если пароли совпали то создами переменные сессии (вход да) и (ID пользователя)
     if (password_verify($password, $row["col_password"])) {
-        $_SESSION["loged"] = "yes";
-        $_SESSION["user_id"] = $row["col_id"];
-
-        if (empty($row['col_company_name'])) {
-            $redirect = "/profile.php?id=" . $row["col_id"];
-            $_SESSION["profile"] = "user";
-        } else {
-            $redirect = "/company_profile.php?id=" . $row["col_id"];
-            $_SESSION["profile"] = "company";
-        }
-
-        $error["name"] = "signin";
-        $error["redirect"] = $redirect;
-        exit(json_encode($error));
+        prepareLoginSession($row, $error);
     } else {
         $ip = getenv("HTTP_X_FORWARDED_FOR");
         if (empty($ip) || $ip == "unknown") $ip = getenv("REMOTE_ADDR");

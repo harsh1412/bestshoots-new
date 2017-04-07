@@ -3,6 +3,7 @@ if (isset($_GET['code'])) {
     include_once './include/constants.php';
     include_once './include/db.php';
     include_once './include/geoipcity.inc';
+    include_once './include/commonFunctions.php';
 
     $result_facebookcom = false;
 
@@ -42,19 +43,7 @@ if (isset($_GET['code'])) {
         $row = mysqli_fetch_assoc($result);
 
         if ($row["col_uid"] == $uid) {
-
-            $_SESSION["loged"] = "yes";
-            $_SESSION["user_id"] = $row["col_id"];
-
-            if (empty($row['col_company_name'])) {
-                $redirect = "/profile.php?id=" . $row["col_id"];
-                $_SESSION["profile"] = "user";
-            } else {
-                $redirect = "/company_profile.php?id=" . $row["col_id"];
-                $_SESSION["profile"] = "company";
-            }
-
-
+            $redirect = setSessions($row);
         } else { //if ($row["col_uid"] == $uid)
 
             $username = mb_strtoupper_first($userInfo["first_name"]);

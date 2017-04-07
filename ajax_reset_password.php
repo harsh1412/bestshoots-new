@@ -1,4 +1,6 @@
 <?php
+include_once './include/commonFunctions.php';
+
 if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
 
     include_once './include/db.php';
@@ -9,17 +11,7 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
 
     if (!empty($password) or !empty($password2)) {
 
-        if (mb_strlen($password, 'utf-8') < 6 or mb_strlen($password, 'utf-8') > 20) {
-            $data['error'] = "Choose a password between 6 and 20 characters";
-            exit(json_encode($data));
-        }
-
-        if ($password != $password2) {
-            $data['error'] = "Passwords do not match";
-            exit(json_encode($data));
-        }
-
-        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $hash = calculatePasswordHash($password, $data, $password2);
 
         $email = trim($_POST["email"]);
         $email = mysqli_real_escape_string($link, $email);
@@ -37,21 +29,7 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
             mysqli_close($link);
             $row = mysqli_fetch_assoc($query);
 
-            $_SESSION["loged"] = "yes";
-            $_SESSION["user_id"] = $row["col_id"];
-
-            if (empty($row['col_company_name'])) {
-                $redirect = "/profile.php?id=" . $row["col_id"];
-                $_SESSION["profile"] = "user";
-            } else {
-                $redirect = "/company_profile.php?id=" . $row["col_id"];
-                $_SESSION["profile"] = "company";
-            }
-
-            $error["name"] = "signin";
-            $error["redirect"] = $redirect;
-            exit(json_encode($error));
-
+            prepareLoginSession($row, $error);
         }
 
     } else {

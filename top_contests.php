@@ -1,6 +1,7 @@
 <?php
 include_once './include/db.php';
 include_once './include/header.php';
+include_once './include/commonFunctions.php';
 ?>
     <section id="content">
         <div id="one-less" class="all">
@@ -10,18 +11,9 @@ include_once './include/header.php';
 <?php
 /*  CONTESTS
 ------------------------------------------------------- */
-//Выбираем все призы
-$sql_prizes = "SELECT 
-					  `col_title`,
-					  `col_type`,
-					  `col_contest_id`
-		         FROM 
-		              `tbl_prizes` ";
-$query_prizes = mysqli_query($link, $sql_prizes);
 
-while ($row_prizes = mysqli_fetch_assoc($query_prizes)) {
-    $array_prizes[] = $row_prizes;
-} //END WHILE
+getAllPrizes($link, $array_prizes);
+
 
 $sql_cnt_id = "SELECT 
                    COUNT(`col_id`) AS `col_count`,

@@ -1,4 +1,6 @@
 <?php
+include_once './include/commonFunctions.php';
+
 if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
 
     include_once './include/db.php';
@@ -9,17 +11,8 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
 
     if (!empty($password) or !empty($password2)) {
 
-        if (mb_strlen($password, 'utf-8') < 6 or mb_strlen($password, 'utf-8') > 20) {
-            $data['error'] = "Choose a password between 6 and 20 characters";
-            exit(json_encode($data));
-        }
+        $hash = calculatePasswordHash($password, $data, $password2);
 
-        if ($password != $password2) {
-            $data['error'] = "Passwords do not match";
-            exit(json_encode($data));
-        }
-
-        $hash = password_hash($password, PASSWORD_BCRYPT);
         $update = "UPDATE `tbl_users` SET `col_password` = '$hash' WHERE `col_id`=" . (int)$_SESSION["user_id"];
         $result = mysqli_query($link, $update);
         mysqli_close($link);

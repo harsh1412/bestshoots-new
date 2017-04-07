@@ -1,16 +1,8 @@
 <?php
 include_once './include/db.php';
+include_once './include/commonFunctions.php';
 
-if ($_SESSION["loged"] == "yes") {
-
-    if ($_SESSION["profile"] == "user") {
-        $url = "profile.php?id=" . $_SESSION["user_id"];
-    } else {
-        $url = "company_profile.php?id=" . $_SESSION["user_id"];
-    }
-
-    header("Location: " . $url);
-}
+setRedirectHeaderToProfile();
 
 include_once './include/header.php';
 ?>
