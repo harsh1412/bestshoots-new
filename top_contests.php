@@ -29,7 +29,10 @@ $query_cnt_id = mysqli_query($link, $sql_cnt_id);
 
 $nn = mysqli_num_rows($query_cnt_id);
 
-while ($row_cnt_id = mysqli_fetch_assoc($query_cnt_id)) $arr_contests[] = $row_cnt_id['col_contest_id'];
+while ($row_cnt_id = mysqli_fetch_assoc($query_cnt_id)) {
+    $arr_contests[] = $row_cnt_id['col_contest_id'];
+}
+
 $contests_id = implode(",", $arr_contests);
 
 $sql_contests = "SELECT 
