@@ -1,6 +1,6 @@
 <configuration xmlns="http://logging.apache.org/log4php/">
     <appender name="myAppender" class="LoggerAppenderFile">
-        <param name="file" value="/var/log/apache2/bestshoots.log" />
+        <param name="file" value="/tmp/bestshoots.log" />
     </appender>
     <root>
         <level value="DEBUG" />

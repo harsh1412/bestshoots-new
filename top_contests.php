@@ -30,7 +30,7 @@ $sql_cnt_id = "SELECT
 		           `col_count` DESC 
 		     LIMIT 10 ";
 
-$log->debug($sql_cnt_id);
+$log->debug(str_replace("\r", "", str_replace("\n", "",$sql_cnt_id)));
 
 $query_cnt_id = mysqli_query($link, $sql_cnt_id);
 
@@ -58,5 +58,7 @@ $sql_contests = "SELECT
 					    c.`col_id`
 			   ORDER BY 
 				        FIND_IN_SET(c.`col_id`, '$contests_id') ";
+
+$log->debug(str_replace("\r", "", str_replace("\n", "",$sql_contests)));
 
 include_once './include/contests.php';
