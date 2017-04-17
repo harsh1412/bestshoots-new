@@ -149,25 +149,14 @@ include_once './include/commonFunctions.php';
 
         /*  BRANDS
         ------------------------------------------------------- */
-        $sql_brands = "SELECT 
-						`col_id`,
-						`col_company_name`,
-						`col_avatar`
-		           FROM 
-		                `tbl_users`
-			      WHERE 
-		                `col_company_name` <> '' 
-	           ORDER BY 
-		                `col_id` DESC 
-				  LIMIT 4";
-        $query_brands = mysqli_query($link, $sql_brands);
 
         $brands = '<div class="column brands">';
         $brands .= '<div class="container">';
         $brands .= '<h3 class="column-title">Brands</h3>';
         $brands .= '<ul class="list">';
 
-        while ($row_brands = mysqli_fetch_assoc($query_brands)) {
+        $usersDao = new usersDao();
+        while ($row_brands = $usersDao->getLatestFour()) {
 
             $brands .= '<li class="item">';
             $brands .= '<a href="/company_profile.php?id=' . $row_brands['col_id'] . '">';
