@@ -2,6 +2,7 @@
 include_once './include/db.php';
 include_once './include/header.php';
 include_once './include/commonFunctions.php';
+include_once './include/repository/usersDao.php';
 ?>
 <section id="content">
     <div id="one" class="homepage">
