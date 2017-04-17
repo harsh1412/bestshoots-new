@@ -1,5 +1,5 @@
 ﻿<?php
-include_once './commonFunctions.php';
+include_once 'commonFunctions.php';
 $query_contests = mysqli_query($link, $sql_contests);
 
 $num_rows = mysqli_num_rows($query_contests);

@@ -1,5 +1,5 @@
 <?php
-include_once './commonFunctions.php';
+include_once 'commonFunctions.php';
 global $mysql_f; //Запрос для записи фидов в базу
 $mysql = "VALUES"; //Запрос для записи победителей в базу
 

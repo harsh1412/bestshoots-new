@@ -1,5 +1,5 @@
 ﻿<?php
-include_once './commonFunctions.php';
+include_once 'commonFunctions.php';
 $num_rows = mysqli_num_rows($query_contests);
 
 if ($num_rows > 0) {
