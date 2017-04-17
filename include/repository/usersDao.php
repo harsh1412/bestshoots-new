@@ -1,6 +1,5 @@
 <?php
 
-include_once '../db.php';
 
 /**
  * Created by IntelliJ IDEA.

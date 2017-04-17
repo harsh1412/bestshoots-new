@@ -12,27 +12,21 @@ include_once './include/header.php';
     /*  ALL PHOTOS FOR CONTESTS
     ------------------------------------------------------- */
     $sql_photo = "SELECT 
-                        p.`col_photo_url`,
-						p.`col_contest_id`,
-						u.`col_id`,
-						u.`col_username`,
-						u.`col_lastname`,
-						COUNT(lk.`col_id`) AS `col_count`,
-						IF(c.`col_date_end` < NOW(), 1, 0) AS `col_end`,
-						c.`col_company_id`
-		           FROM 
-		                `tbl_photo` p
-		      LEFT JOIN 
-	                    `tbl_users` u ON u.`col_id` = p.`col_user_id`
-			  LEFT JOIN 
-						`tbl_likes` lk ON lk.`col_author_id` = p.`col_user_id` AND lk.`col_contest_id` = p.`col_contest_id`
-			  LEFT JOIN 
-						`tbl_contests` c ON c.`col_id` = p.`col_contest_id`
-			   GROUP BY 
-				        p.`col_id` 
-	           ORDER BY 	  
-				        p.`col_id` DESC 
-			      LIMIT 20";
+p.`col_photo_url`,
+p.`col_contest_id`,
+u.`col_id`,
+u.`col_username`,
+u.`col_lastname`,
+COUNT(lk.`col_id`) AS `col_count`,
+IF(c.`col_date_end` < NOW(), 1, 0) AS `col_end`,
+c.`col_company_id`
+FROM `tbl_photo` p
+LEFT JOIN `tbl_users` u ON u.`col_id` = p.`col_user_id`
+LEFT JOIN `tbl_likes` lk ON lk.`col_author_id` = p.`col_user_id` AND lk.`col_contest_id` = p.`col_contest_id`
+LEFT JOIN `tbl_contests` c ON c.`col_id` = p.`col_contest_id`
+GROUP BY p.`col_id` 
+ORDER BY p.`col_id` DESC 
+LIMIT 20";
     $query_photo = mysqli_query($link, $sql_photo);
 
     $photo = '<ul class="last-photos">';

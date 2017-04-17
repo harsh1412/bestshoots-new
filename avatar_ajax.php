@@ -42,7 +42,6 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
         ====================================================================================================*/
         if ($_POST['dir'] == "contests/users_photo") {
             include_once './include/db.php';
-            global $link;
             $photo_url = mysqli_real_escape_string($link, $unic_name);
 
             $insert = "INSERT INTO `tbl_photo` VALUES (
