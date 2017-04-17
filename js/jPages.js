@@ -491,7 +491,9 @@
     updatePause : function() {
       if (this.options.pause && this._numPages > 1) {
         clearTimeout(this._pause);
-        if (this.options.clickStop && this._clicked) return;
+        if (this.options.clickStop && this._clicked) {
+            return;
+        }
         else {
           this._pause = setTimeout(this.bind(function() {
             this.paginate(this._currentPageNum !== this._numPages ? this._currentPageNum + 1 : 1);

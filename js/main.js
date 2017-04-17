@@ -1246,7 +1246,7 @@ $(document).ready(function(){
 		
 		$('#js-type').children('.js-option').removeClass('check');
 		$this.addClass('check');
-		$('#js-add-prize').data('type', $this.data('type'))
+		$('#js-add-prize').data('type', $this.data('type'));
 		return false;
 	});
 	

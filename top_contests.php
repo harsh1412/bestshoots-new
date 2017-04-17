@@ -2,6 +2,10 @@
 include_once './include/db.php';
 include_once './include/header.php';
 include_once './include/commonFunctions.php';
+include_once './include/log4php/Logger.php';
+Logger::configure('./include/log4php.xml');
+$log = Logger::getLogger('TOP_CONTESTS');
+
 ?>
     <section id="content">
         <div id="one-less" class="all">
@@ -25,6 +29,9 @@ $sql_cnt_id = "SELECT
 	      ORDER BY 
 		           `col_count` DESC 
 		     LIMIT 10 ";
+
+$log->debug($sql_cnt_id);
+
 $query_cnt_id = mysqli_query($link, $sql_cnt_id);
 
 $nn = mysqli_num_rows($query_cnt_id);

@@ -431,6 +431,7 @@ body,
 	margin: 107px 0 15px;
 	font-size: 63px;
 	font-family: 'Seravek-ExtraLight';
+	text-shadow: 1px 1px 1px #000;
 }
 #one > h2 {
 	margin-bottom: 45px;
