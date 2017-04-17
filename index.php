@@ -157,7 +157,8 @@ include_once './include/repository/usersDao.php';
         $brands .= '<ul class="list">';
 
         $usersDao = new usersDao($link);
-        while ($row_brands = $usersDao->getLatestFour()) {
+        $list = $usersDao->getLatestFour();
+        foreach ($list as $row_brands) {
 
             $brands .= '<li class="item">';
             $brands .= '<a href="/company_profile.php?id=' . $row_brands['col_id'] . '">';
