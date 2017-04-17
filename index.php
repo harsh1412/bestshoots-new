@@ -156,7 +156,7 @@ include_once './include/repository/usersDao.php';
         $brands .= '<h3 class="column-title">Brands</h3>';
         $brands .= '<ul class="list">';
 
-        $usersDao = new usersDao();
+        $usersDao = new usersDao($link);
         while ($row_brands = $usersDao->getLatestFour()) {
 
             $brands .= '<li class="item">';
