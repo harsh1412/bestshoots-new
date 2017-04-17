@@ -1,6 +1,8 @@
 <?php
 if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
     include_once './include/db.php';
+    include_once './include/commonFunctions.php';
+
     header("Content-Type: text/html; charset=utf-8");
 
     $title = trim($_POST["title"]);
@@ -34,7 +36,7 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
 
     //***News Feed***
     $feed_link = '/inner_page.php?id=' . $id_contest;
-    $logo = '/img/contests/logo/' . $logo;
+    $logo = getContestLogoUrl($logo);
 
     $text = 'Created a new contest <a class="link" href="' . $feed_link . '">' . $title . '</a>';
     $text = mysqli_real_escape_string($link, $text);

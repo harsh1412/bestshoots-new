@@ -98,3 +98,17 @@ function calculatePasswordHash($password, $data, $password2)
     $hash = password_hash($password, PASSWORD_BCRYPT);
     return $hash;
 }
+
+
+/**
+ * @param $logo
+ * @return string
+ */
+function getContestLogoUrl($logo)
+{
+    if(strlen($logo) > 0) {
+        return '/img/contests/logo/' . $logo;
+    }
+
+    return '/images/no-image.jpg';
+}

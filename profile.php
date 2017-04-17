@@ -33,6 +33,7 @@ $row = mysqli_fetch_assoc($query);
 $username_pr = $row['col_username'] . ' ' . $row['col_lastname'];
 
 include_once './include/header.php';
+include_once './include/commonFunctions.php';
 ?>
 <section id="content">
     <div id="one" class="profile">
@@ -82,7 +83,8 @@ include_once './include/header.php';
 
                 $contests .= '<li class="item">';
                 $contests .= '<a href="/inner_page.php?id=' . $row_contests['col_id'] . '" class="company-logo">';
-                $contests .= '<img src="/img/contests/logo/' . $row_contests['col_logo'] . '" alt="' . $row_contests['col_title'] . '">';
+                $logoUrl = getContestLogoUrl($row_contests['col_logo']);
+                $contests .= '<img src="' . $logoUrl . '" alt="' . $row_contests['col_title'] . '">';
                 //<span class="mark">1st</span>
                 $contests .= '</a>';
                 $contests .= '<div class="title">' . $row_contests['col_title'] . '</div>';

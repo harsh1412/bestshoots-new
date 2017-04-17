@@ -1,4 +1,5 @@
 <?php
+include_once './commonFunctions.php';
 global $mysql_f; //Запрос для записи фидов в базу
 $mysql = "VALUES"; //Запрос для записи победителей в базу
 
@@ -7,7 +8,7 @@ function feeds($f_user_id, $f_text, $f_logo, $f_contest_id, $f_contest_title, $f
 	
 	
 	$feed_link = '/inner_page.php?id='. $f_contest_id;
-	$logo = '/img/contests/logo/'. $f_logo;
+	$logo = getContestLogoUrl($f_logo);
 	$text = $f_text .' <a class="link" href="'. $feed_link .'">'. $f_contest_title .'</a>';	
 	
 	

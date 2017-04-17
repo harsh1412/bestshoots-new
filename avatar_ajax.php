@@ -1,5 +1,7 @@
 <?php
 if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
+    include_once './include/commonFunctions.php';
+
     header("Content-Type: text/html; charset=utf-8");
 
     function close()
@@ -53,7 +55,8 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
 
             //***News Feed***
             $feed_link = '/inner_page.php?id=' . $_POST['contest_id'];
-            $logo = '/img/contests/logo/' . $_POST['contest_logo'];
+            $logo = getContestLogoUrl($_POST['contest_logo']);
+
             $text = 'Participated in <a class="link" href="' . $feed_link . '">' . $_POST['contest_title'] . '</a>';
 
             $text = mysqli_real_escape_string($link, $text);

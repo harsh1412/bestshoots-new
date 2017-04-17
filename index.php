@@ -1,6 +1,7 @@
 <?php
 include_once './include/db.php';
 include_once './include/header.php';
+include_once './include/commonFunctions.php';
 ?>
 <section id="content">
     <div id="one" class="homepage">
@@ -40,7 +41,8 @@ include_once './include/header.php';
 
             $contests .= '<li class="item">';
             $contests .= '<a href="/inner_page.php?id=' . $row_contests['col_id'] . '" class="company-logo">';
-            $contests .= '<img src="/img/contests/logo/' . $row_contests['col_logo'] . '" alt="' . $row_contests['col_title'] . '">';
+            $logoUrl = getContestLogoUrl($row_contests['col_logo']);
+            $contests .= '<img src="' . $logoUrl . '" alt="' . $row_contests['col_title'] . '">';
             $contests .= '</a>';
             $contests .= '<div class="content">';
             $contests .= '<a href="/inner_page.php?id=' . $row_contests['col_id'] . '" class="title">' . $row_contests['col_title'] . '</a>';
