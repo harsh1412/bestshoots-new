@@ -40,6 +40,7 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
 			" . (int)$_SESSION["user_id"] . "
 			) ";
 
+    include_once './include/log4php/Logger.php';
     Logger::configure('./include/log4php.xml');
     $log = Logger::getLogger('TOP_CONTESTS');
 
