@@ -1,6 +1,8 @@
 <?php
 
 
+include_once 'baseDao.php';
+
 /**
  * Created by IntelliJ IDEA.
  * User: anton
