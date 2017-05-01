@@ -12,7 +12,8 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
     $img = trim($_POST["img"]);
     $img = mysqli_real_escape_string($link, $img);
 
-    $sql = "SELECT `col_end_winners` FROM `tbl_prizes` WHERE `col_contest_id` = " . (int)$_POST["contest_id"] . " 
+    $contestId = (int)$_POST["contest_id"];
+    $sql = "SELECT `col_end_winners` FROM `tbl_prizes` WHERE `col_contest_id` = " . $contestId . " 
 		AND `col_type` = " . (int)$_POST["type"] . " ORDER BY `col_end_winners` DESC LIMIT 1";
     $query = mysqli_query($link, $sql);
 
@@ -36,7 +37,7 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
 			" . (int)$start_winners . ",
 			" . (int)$end_winners . ",
 			" . (int)$_POST["type"] . ",
-			" . (int)$_POST["contest_id"] . ",
+			" . $contestId . ",
 			" . (int)$_SESSION["user_id"] . "
 			) ";
 
