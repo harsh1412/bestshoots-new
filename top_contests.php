@@ -20,25 +20,14 @@ getAllPrizes($link, $array_prizes);
 
 
 $sql_cnt_id = "SELECT 
-                   COUNT(`col_id`) AS `col_count`,
-  				   `col_contest_id`
-		      FROM 
-		           `tbl_likes`
-	      GROUP BY 
-			       `col_contest_id`
-	      ORDER BY 
-		           `col_count` DESC 
-		     LIMIT 10 ";
+COUNT(`col_id`) AS `col_count`,
+`col_contest_id`
+FROM `tbl_likes`
+GROUP BY `col_contest_id`
+ORDER BY `col_count` DESC 
+LIMIT 10 ";
 
-/**
- * @param $text
- * @return mixed
- */
-function safeLogging($text)
-{
-    $order   = array("\r\n", "\n", "\r", "\t");
-    return str_replace($order, "", $text);
-}
+
 
 $log->debug(safeLogging($sql_cnt_id));
 
@@ -53,21 +42,16 @@ while ($row_cnt_id = mysqli_fetch_assoc($query_cnt_id)) {
 $contests_id = implode(",", $arr_contests);
 
 $sql_contests = "SELECT 
-                        c.`col_id`,
-						c.`col_title`,
-						c.`col_logo`,
-						c.`col_company_id`,
-						u.`col_company_name`
-		           FROM 
-		                `tbl_contests` c
-			       JOIN 
-	                    `tbl_users` u ON u.`col_id` = c.`col_company_id`
-				  WHERE
-				        c.`col_id` IN($contests_id)
-	           GROUP BY 
-					    c.`col_id`
-			   ORDER BY 
-				        FIND_IN_SET(c.`col_id`, '$contests_id') ";
+c.`col_id`,
+c.`col_title`,
+c.`col_logo`,
+c.`col_company_id`,
+u.`col_company_name`
+FROM `tbl_contests` c
+JOIN `tbl_users` u ON u.`col_id` = c.`col_company_id`
+WHERE c.`col_id` IN($contests_id)
+GROUP BY c.`col_id`
+ORDER BY FIND_IN_SET(c.`col_id`, '$contests_id') ";
 
 $log->debug(safeLogging($sql_contests));
 

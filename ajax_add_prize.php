@@ -40,6 +40,11 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
 			" . (int)$_SESSION["user_id"] . "
 			) ";
 
+    Logger::configure('./include/log4php.xml');
+    $log = Logger::getLogger('TOP_CONTESTS');
+
+    $log->debug("insert query " . $insert);
+
     mysqli_query($link, $insert);
     $id_contest = mysqli_insert_id($link);
     mysqli_close($link);

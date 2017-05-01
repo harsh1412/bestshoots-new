@@ -66,23 +66,18 @@ include_once './include/repository/usersDao.php';
         /*  PRIZES
         ------------------------------------------------------- */
         $sql_prizes = "SELECT 
-                    p.`col_title`,
-					p.`col_img`,
-			        p.`col_company_id`,
-					p.`col_contest_id`,
-					c.`col_title` AS `col_contest_title`,
-					u.`col_company_name`
-		       FROM 
-		            `tbl_prizes` p
-		  LEFT JOIN 
-	                `tbl_contests` c ON c.`col_id` = p.`col_contest_id`
-		  LEFT JOIN 
-	                `tbl_users` u ON u.`col_id` = p.`col_company_id`
-		   GROUP BY 
-				    p.`col_contest_id`
-		   ORDER BY 
-		            p.`col_id` DESC 
-			  LIMIT 10 ";
+p.`col_title`,
+p.`col_img`,
+p.`col_company_id`,
+p.`col_contest_id`,
+c.`col_title` AS `col_contest_title`,
+u.`col_company_name`
+FROM `tbl_prizes` p
+LEFT JOIN `tbl_contests` c ON c.`col_id` = p.`col_contest_id`
+LEFT JOIN `tbl_users` u ON u.`col_id` = p.`col_company_id`
+GROUP BY p.`col_contest_id`
+ORDER BY p.`col_id` DESC 
+LIMIT 10 ";
         $query_prizes = mysqli_query($link, $sql_prizes);
 
         $html = '<div class="column products-prizes">';
@@ -106,7 +101,9 @@ include_once './include/repository/usersDao.php';
                 $prizes .= '<div class="contest-name">' . $row_prizes['col_company_name'] . '</div>';
                 $prizes .= '</a>';
             } else {
-                if ($i == 3) $contest_id = $row_prizes['col_contest_id'];
+                if ($i == 3){
+                    $contest_id = $row_prizes['col_contest_id'];
+                }
 
                 $html_c .= '<div class="swPage" data-contest-id="' . $row_prizes['col_contest_id'] . '">';
                 $html_c .= '<a class="left-block" href="/company_profile.php?id=' . $row_prizes['col_company_id'] . '">';

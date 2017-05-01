@@ -112,3 +112,14 @@ function getContestLogoUrl($logo)
 
     return '/images/no-image.jpg';
 }
+
+
+/**
+ * @param $text
+ * @return mixed
+ */
+function safeLogging($text)
+{
+    $order   = array("\r\n", "\n", "\r", "\t");
+    return str_replace($order, "", $text);
+}

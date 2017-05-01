@@ -2,6 +2,7 @@
 if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
     include_once './include/db.php';
     include_once './include/commonFunctions.php';
+    include_once './include/repository/contestsDao.php';
 
     header("Content-Type: text/html; charset=utf-8");
 
@@ -20,19 +21,8 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
     $duration = trim($_POST["duration"]);
     $duration = mysqli_real_escape_string($link, $duration);
 
-    $insert = "INSERT INTO `tbl_contests` VALUES (
-		NULL, 
-		'" . $title . "',
-		'" . $about . "',
-		'" . $header_photo . "',
-		'" . $logo . "',
-		NOW(),
-		NOW() + INTERVAL " . $duration . ",
-		" . (int)$_SESSION["user_id"] . ",
-		0) ";
-
-    mysqli_query($link, $insert);
-    $id_contest = mysqli_insert_id($link);
+    $contestsDao = new contestsDao($link);
+    $id_contest = $contestsDao->addContest($title, $about, $header_photo, $logo, $duration);
 
     //***News Feed***
     $feed_link = '/inner_page.php?id=' . $id_contest;

@@ -7,13 +7,9 @@
  * Date: 18.04.17
  * Time: 0:06
  */
-class usersDao
+class usersDao extends baseDao
 {
-    var $link;
 
-    function __construct($link) {
-        $this->link = $link;
-    }
 
     public function getLatestFour(){
         $sql_brands = "SELECT 
